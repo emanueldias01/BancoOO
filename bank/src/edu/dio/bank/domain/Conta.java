@@ -1,11 +1,21 @@
 package edu.dio.bank.domain;
 
 public class Conta implements IConta{
+    private Banco banco;
     private final int numeroAgencia = 1;
     private int id;
 
     private Double saldo;
     private Cliente cliente;
+
+    public Conta(Cliente cliente){
+        this.cliente = cliente;
+        this.id = this.getBanco().contas.size() + 1;
+    }
+
+    public Banco getBanco() {
+        return banco;
+    }
 
     public Cliente getCliente() {
         return cliente;
@@ -19,7 +29,7 @@ public class Conta implements IConta{
         return numeroAgencia;
     }
 
-    public Double getSaldo() {
+    protected Double getSaldo() {
         return saldo;
     }
 
