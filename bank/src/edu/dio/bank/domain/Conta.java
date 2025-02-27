@@ -1,6 +1,6 @@
 package edu.dio.bank.domain;
 
-public class Conta implements IConta{
+public abstract class Conta implements IConta{
     private Banco banco;
     private final int numeroAgencia = 1;
     private int id;
@@ -8,9 +8,11 @@ public class Conta implements IConta{
     private Double saldo;
     private Cliente cliente;
 
-    public Conta(Cliente cliente){
+    public Conta(Cliente cliente, Banco banco){
+        this.banco = banco;
         this.cliente = cliente;
         this.id = this.getBanco().contas.size() + 1;
+        this.saldo = 0d;
     }
 
     public Banco getBanco() {
@@ -52,5 +54,14 @@ public class Conta implements IConta{
     @Override
     public void verificarSaldo() {
         System.out.println("Saldo: " + this.getSaldo());
+    }
+
+    public void exibeInfoConta(){
+        System.out.printf("""
+                Agencia: %d
+                Cliente: %s
+                IdConta: %d
+                Saldo: %.2f
+                """, this.getNumeroAgencia(), this.getCliente(), this.getId(), this.getSaldo());
     }
 }
